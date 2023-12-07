@@ -1,5 +1,6 @@
 import { biscuits, chocolate, pink, strawberry } from "@assets/images/donuts";
 import { useEffect, useState } from "react";
+import HomeNavbar from "./HomeNavbar";
 
 const HomePageHero = () => {
   // const [images, setImages] = useState([strawberry, biscuits, chocolate, pink]);
@@ -51,9 +52,12 @@ const HomePageHero = () => {
   console.log(current);
 
   return (
-    <div>
+    <div className=" z-[100]">
       <div className=" grid grid-cols-4 overflow-hidden h-screen">
-        <div className=" col-span-2"></div>
+        <div className=" col-span-2">
+          <HomeNavbar />
+          <h1 className=" text-7xl">TEST</h1>
+        </div>
 
         <div className=" col-span-2 grid grid-cols-2 grid-rows-3 gap-y-5 transition-all duration-500 ease-in-out w-full relative">
           {/* <circle className={` bg-gradient-to-tr from-[#FD5688] to-[#FD5688] rounded-s-[50%] w-full h-full absolute`} /> */}
