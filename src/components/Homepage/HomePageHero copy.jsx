@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const HomePageHero = () => {
   // const [images, setImages] = useState([strawberry, biscuits, chocolate, pink]);
-
+  const [current, setCurrent] = useState(0);
   const [images, setImages] = useState([
     {
       src: strawberry,
@@ -27,28 +27,28 @@ const HomePageHero = () => {
     },
   ]);
   // const [gradient, setGradient] = useState(`from-[#FD5688] to-[#FD5688]`);
-  const [gradient, setGradient] = useState({
-    bgTo: images[0].bgTo,
-    bgFrom: images[0].bgFrom,
-  });
+  const [gradient, setGradient] = useState(`from-[${images[0].bgTo}] to-[${images[0].bgFrom}]`);
 
-  const handleClick = (i) => {
+  const generateGradientColor = () => {
+    const currentImage = images[current];
+    const gradientColor = `from-[${currentImage.bgFrom}] to-[${currentImage.bgTo}]`;
+    return gradientColor;
+  };
+  const handleClick = (obj, i) => {
     const newImages = [...images];
     [newImages[i], newImages[0]] = [newImages[0], newImages[i]];
     setImages(newImages);
-
+    setCurrent(i);
     // setGradient(generateGradientColor());
     // setGradient({ ...obj });
   };
 
   useEffect(() => {
-    setGradient({
-      bgTo: images[0].bgTo,
-      bgFrom: images[0].bgFrom,
-    });
+    setGradient(`from-[${images[0].bgTo}] to-[${images[0].bgFrom}]`);
   }, [images]);
 
   console.log(gradient);
+  console.log(current);
 
   return (
     <div>
@@ -57,37 +57,26 @@ const HomePageHero = () => {
 
         <div className=" col-span-2 grid grid-cols-2 grid-rows-3 gap-y-5 transition-all duration-500 ease-in-out w-full relative">
           {/* <circle className={` bg-gradient-to-tr from-[#FD5688] to-[#FD5688] rounded-s-[50%] w-full h-full absolute`} /> */}
-          <div
-            className={`rounded-s-[50%] w-full h-full absolute transition-all duration-200`}
-            // style={{ background: `linear-gradient(to left top, ${gradient.bgFrom}, 50%, ${gradient.bgTo})` }}
-            style={{ background: `linear-gradient(200deg, ${gradient?.bgFrom}, 50%, ${gradient?.bgTo})` }}
-            // style={{ background: `linear-gradient(${gradient.bgFrom}, 50%, ${gradient.bgTo})` }}
-          />
-          {/* <div
-            className={` bg-gradient-to-tr from-[${bgTo}] to-[${bgTo}] rounded-s-[50%] w-full h-full absolute`}
-          ></div> */}
+          <circle className={` bg-gradient-to-tr ${gradient} rounded-s-[50%] w-full h-full absolute`} />
           {images.map((obj, i) => {
             let rowSpan;
             let scale;
             if (i === 0) {
               rowSpan = "row-span-3";
-              scale = "scale-150 hover:scale-[1.60]";
+              scale = "scale-150";
             } else {
               rowSpan = "row-span-1";
-              scale = "scale-100 hover:scale-110";
+              scale = "scale-100";
             }
             return (
-              <div
-                className={`${rowSpan} col-span-1 flex justify-center items-center transition-all duration-300`}
-                key={i}
-              >
+              <div className={`${rowSpan} col-span-1 flex justify-center items-center`} key={i}>
                 <img
-                  className={`${scale} object-contain bg-transparent cursor-pointer transition-all duration-300`}
+                  className={`${scale} object-contain bg-transparent cursor-pointer`}
                   key={i}
                   src={obj.src}
                   alt={`Image ${i + 1}`}
                   onClick={() => {
-                    handleClick(i);
+                    handleClick(obj, i);
                   }}
                 />
               </div>
