@@ -51,14 +51,14 @@ const HomePageHero = () => {
   console.log(gradient);
 
   return (
-    <div>
+    <div className=" bg-[#FCF8F8]">
       <div className=" grid grid-cols-4 overflow-hidden h-screen">
         <div className=" col-span-2"></div>
 
-        <div className=" col-span-2 grid grid-cols-2 grid-rows-3 gap-y-5 transition-all duration-500 ease-in-out w-full relative">
+        <div className=" col-span-2 grid grid-cols-2 grid-rows-3 gap-y-5 transition-all duration-500 ease-in-out w-full relative z-10">
           {/* <circle className={` bg-gradient-to-tr from-[#FD5688] to-[#FD5688] rounded-s-[50%] w-full h-full absolute`} /> */}
           <div
-            className={`rounded-s-[50%] w-full h-full absolute transition-all duration-200`}
+            className={`rounded-s-[48%] w-full h-full absolute transition-all duration-200 z-[-1]`}
             // style={{ background: `linear-gradient(to left top, ${gradient.bgFrom}, 50%, ${gradient.bgTo})` }}
             style={{ background: `linear-gradient(200deg, ${gradient?.bgFrom}, 50%, ${gradient?.bgTo})` }}
             // style={{ background: `linear-gradient(${gradient.bgFrom}, 50%, ${gradient.bgTo})` }}
@@ -71,10 +71,12 @@ const HomePageHero = () => {
             let scale;
             if (i === 0) {
               rowSpan = "row-span-3";
-              scale = "scale-150 hover:scale-[1.60]";
+              // scale = "scale-[2.00] hover:scale-[2.10]";
+              scale = "w-[75%] hover:scale-110";
             } else {
               rowSpan = "row-span-1";
-              scale = "scale-100 hover:scale-110";
+              // scale = "scale-[1.20] hover:scale-[1.30]";
+              scale = "w-[50%] hover:scale-110";
             }
             return (
               <div
@@ -82,6 +84,7 @@ const HomePageHero = () => {
                 key={i}
               >
                 <img
+                  draggable={false}
                   className={`${scale} object-contain bg-transparent cursor-pointer transition-all duration-300`}
                   key={i}
                   src={obj.src}
