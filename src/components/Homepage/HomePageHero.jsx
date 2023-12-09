@@ -68,6 +68,7 @@ const HomePageHero = () => {
       <div className=" grid grid-cols-4 overflow-hidden h-screen">
         <div className=" col-span-2">
           <HomeNavbar />
+          {/* <div className=" h-[10vh]"></div> */}
           <HomeHeroText activeData={activeData} />
         </div>
 
